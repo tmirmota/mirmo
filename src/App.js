@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import update from 'immutability-helper'
 import _ from 'lodash'
 import './App.css'
 
@@ -7,8 +8,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 // Components
 import Nav from './components/Nav'
-import Projects from './components/Projects'
 import Chips from './components/Chips'
+import Projects from './components/Projects'
+import Checkboxes from './components/Checkboxes'
 
 // Data
 import projects from './data/projects'
@@ -25,8 +27,9 @@ export default class App extends Component {
   handleRequestDelete = tech => {
     const { technologies } = this.state
     const index = technologies.indexOf(tech)
-    technologies.splice(index, 1)
-    this.setState({ technologies })
+    const newTechnologies = update(technologies, { $splice: [[index, 1]] })
+
+    this.setState({ technologies: newTechnologies })
   }
   render() {
     const { technologies } = this.state
@@ -55,6 +58,7 @@ export default class App extends Component {
                   technologies={technologies}
                   handleRequestDelete={this.handleRequestDelete}
                 />
+                <Checkboxes technologies={technologies} />
                 <Projects projects={projects} technologies={technologies} />
               </div>
             </div>

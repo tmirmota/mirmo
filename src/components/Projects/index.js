@@ -18,7 +18,6 @@ export default class Projects extends Component {
 
           {projects.map((project, index) => {
             const validTech = _.difference(project.technologies, technologies)
-            console.log(validTech.length)
             if (validTech.length === 0) {
               return (
                 <div className="col-4" key={index}>
