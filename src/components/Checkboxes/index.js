@@ -6,14 +6,26 @@ import Checkbox from 'material-ui/Checkbox'
 export default class Checkboxes extends Component {
   componentWillMount() {
     const { technologies } = this.props
-    this.setState({ technologies })
+    this.setState({ allTech: technologies })
   }
   render() {
-    const { technologies } = this.state
-    if (technologies) {
+    const { handleCheck, technologies } = this.props
+    const { allTech } = this.state
+    if (allTech) {
       return (
         <div>
-          {technologies.map(tech => <Checkbox key={tech} label={tech} />)}
+          {allTech.map(tech => {
+            const isChecked = technologies.indexOf(tech) > -1
+            const checked = isChecked ? true : false
+            return (
+              <Checkbox
+                key={tech}
+                label={tech}
+                checked={checked}
+                onCheck={() => handleCheck(tech)}
+              />
+            )
+          })}
         </div>
       )
     } else {
