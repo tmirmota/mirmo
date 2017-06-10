@@ -22,6 +22,12 @@ export default class App extends Component {
 
     this.setState({ technologies })
   }
+  handleRequestDelete = tech => {
+    const { technologies } = this.state
+    const index = technologies.indexOf(tech)
+    technologies.splice(index, 1)
+    this.setState({ technologies })
+  }
   render() {
     const { technologies } = this.state
     return (
@@ -40,13 +46,19 @@ export default class App extends Component {
               </div>
             </div>
           </header>
-          <div className="row text-center">
-            <div className="col">
-              <h3 className="display-1 my-4">Projects</h3>
-              <Chips technologies={technologies} />
-              <Projects projects={projects} />
+
+          <section className="container">
+            <div className="row text-center">
+              <div className="col">
+                <h3 className="display-1 my-4">Projects</h3>
+                <Chips
+                  technologies={technologies}
+                  handleRequestDelete={this.handleRequestDelete}
+                />
+                <Projects projects={projects} technologies={technologies} />
+              </div>
             </div>
-          </div>
+          </section>
 
         </div>
       </MuiThemeProvider>

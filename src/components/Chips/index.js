@@ -8,11 +8,13 @@ export default class Chips extends Component {
     console.log('tech deleted')
   }
   render() {
-    const { technologies } = this.props
+    const { technologies, handleRequestDelete } = this.props
     return (
       <div>
         {technologies.map(tech => (
-          <Chip key={tech} onRequestDelete={this.deleteTech}>{tech}</Chip>
+          <Chip key={tech} onRequestDelete={() => handleRequestDelete(tech)}>
+            {tech}
+          </Chip>
         ))}
       </div>
     )
