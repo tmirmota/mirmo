@@ -1,0 +1,9 @@
+.header {
+  background: linear-gradient(to bottom right, rgb(175, 116, 181), rgb(109, 254, 233));
+  min-height: 100vh;
+}
+
+.header_content {
+  min-height: 100vh;
+  text-align: center;
+}
