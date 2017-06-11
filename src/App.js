@@ -15,6 +15,7 @@ import Nav from './components/Nav'
 import Chips from './components/Chips'
 import Projects from './components/Projects'
 import Checkboxes from './components/Checkboxes'
+import InputColors from './components/InputColors'
 
 // Data
 import projects from './data/projects'
@@ -22,6 +23,10 @@ import projects from './data/projects'
 export default class App extends Component {
   state = {
     filterStatus: false,
+    headerColors: {
+      color1: '#af74b5',
+      color2: '#6dfee9',
+    },
   }
   componentWillMount() {
     const arrTechnologies = _.map(projects, 'technologies')
@@ -65,11 +70,22 @@ export default class App extends Component {
   }
 
   render() {
-    const { activeTech, allTech, filterStatus } = this.state
+    const { activeTech, allTech, filterStatus, headerColors } = this.state
+
+    // Styling
+    const styles = {
+      header: {
+        background: `linear-gradient(to bottom right, ${headerColors.color1}, ${headerColors.color2})`,
+        minHeight: '100vh',
+      },
+    }
+
     return (
       <MuiThemeProvider>
         <div>
-          <header className="header">
+
+          {/* HEADER SECTION */}
+          <header style={styles.header}>
             <div className="container">
               <div className="row header_content">
                 <Nav />
@@ -79,6 +95,7 @@ export default class App extends Component {
                 <div className="col align-self-center">
                   Image
                 </div>
+                <InputColors colors={headerColors} />
               </div>
             </div>
           </header>
