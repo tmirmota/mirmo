@@ -26,6 +26,8 @@ export default class App extends Component {
     headerColors: {
       color1: '#af74b5',
       color2: '#6dfee9',
+      swatch1: false,
+      swatch2: false,
     },
   }
   componentWillMount() {
@@ -59,6 +61,49 @@ export default class App extends Component {
     // this.state({ activeTech: updatedTech })
   }
 
+  handleColorSelect = color => {
+    const { headerColors } = this.state
+    const isColor1 = color === 'color1'
+
+    if (isColor1) {
+      const isAlreadyOpen = headerColors.swatch1
+      if (isAlreadyOpen) {
+        const closeSwatch = update(headerColors, { swatch1: { $set: false } })
+        this.setState({ headerColors: closeSwatch })
+      } else {
+        const openSwatch = update(headerColors, {
+          swatch1: { $set: true },
+          swatch2: { $set: false },
+        })
+        this.setState({ headerColors: openSwatch })
+      }
+    } else {
+      const isAlreadyOpen = headerColors.swatch2
+      if (isAlreadyOpen) {
+        const closeSwatch = update(headerColors, { swatch2: { $set: false } })
+        this.setState({ headerColors: closeSwatch })
+      } else {
+        const openSwatch = update(headerColors, {
+          swatch1: { $set: false },
+          swatch2: { $set: true },
+        })
+        this.setState({ headerColors: openSwatch })
+      }
+    }
+  }
+
+  handleColor1 = ({ hex }) => {
+    const { headerColors } = this.state
+    const updateColor = update(headerColors, { color1: { $set: hex } })
+    this.setState({ headerColors: updateColor })
+  }
+
+  handleColor2 = ({ hex }) => {
+    const { headerColors } = this.state
+    const updateColor = update(headerColors, { color2: { $set: hex } })
+    this.setState({ headerColors: updateColor })
+  }
+
   toggleFilter = () => {
     const { filterStatus } = this.state
     const isFilterActive = filterStatus
@@ -88,14 +133,18 @@ export default class App extends Component {
           <header style={styles.header}>
             <div className="container">
               <div className="row header_content">
-                <Nav />
                 <div className="col align-self-center">
                   Thomas Mirmo
                 </div>
                 <div className="col align-self-center">
                   Image
                 </div>
-                <InputColors colors={headerColors} />
+                <InputColors
+                  colors={headerColors}
+                  handleChange1={this.handleColor1}
+                  handleChange2={this.handleColor2}
+                  handleSelect={this.handleColorSelect}
+                />
               </div>
             </div>
           </header>
