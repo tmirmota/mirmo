@@ -6,10 +6,14 @@ import Chip from 'material-ui/Chip'
 // Styling
 const styles = {
   chip: {
-    margin: 4,
+    margin: 6,
+    padding: 5,
+    borderRadius: '25px',
   },
   label: {
     color: '#FFFFFF',
+    fontSize: '1.2rem',
+    fontWeight: 100,
   },
   backgroundColor: '#03A9F4',
 }

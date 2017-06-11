@@ -8,6 +8,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import ContentRemove from 'material-ui/svg-icons/content/remove'
+import Divider from 'material-ui/Divider'
 
 // Components
 import Nav from './components/Nav'
@@ -92,10 +93,11 @@ export default class App extends Component {
                   activeTech={activeTech}
                   handleRequestDelete={this.handleRequestDelete}
                 />
+
                 <Projects projects={projects} activeTech={activeTech} />
 
                 <FloatingActionButton
-                  className="my-4"
+                  className="projects_floating_button"
                   backgroundColor="#03A9F4"
                   secondary={filterStatus}
                   onTouchTap={this.toggleFilter}
@@ -111,9 +113,10 @@ export default class App extends Component {
                     handleCheck={this.handleCheck}
                   />}
 
+                <Divider />
+
               </div>
             </div>
-            <hr />
           </section>
 
           <section className="container">
