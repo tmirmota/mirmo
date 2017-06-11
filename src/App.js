@@ -113,6 +113,7 @@ export default class App extends Component {
 
               </div>
             </div>
+            <hr />
           </section>
 
           <section className="container">
