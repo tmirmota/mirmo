@@ -5,6 +5,9 @@ import './App.css'
 
 // Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import FloatingActionButton from 'material-ui/FloatingActionButton'
+import ContentAdd from 'material-ui/svg-icons/content/add'
+import ContentRemove from 'material-ui/svg-icons/content/remove'
 
 // Components
 import Nav from './components/Nav'
@@ -17,10 +20,7 @@ import projects from './data/projects'
 
 export default class App extends Component {
   state = {
-    filter: {
-      status: false,
-      title: 'Show Filters',
-    },
+    filterStatus: false,
   }
   componentWillMount() {
     const arrTechnologies = _.map(projects, 'technologies')
@@ -54,17 +54,17 @@ export default class App extends Component {
   }
 
   toggleFilter = () => {
-    const { filter } = this.state
-    const isFilterActive = filter.status
+    const { filterStatus } = this.state
+    const isFilterActive = filterStatus
     if (isFilterActive) {
-      this.setState({ filter: { status: false, title: 'Show Filters' } })
+      this.setState({ filterStatus: false })
     } else {
-      this.setState({ filter: { status: true, title: 'Hide Filters' } })
+      this.setState({ filterStatus: true })
     }
   }
 
   render() {
-    const { activeTech, allTech, filter } = this.state
+    const { activeTech, allTech, filterStatus } = this.state
     return (
       <MuiThemeProvider>
         <div>
@@ -82,24 +82,42 @@ export default class App extends Component {
             </div>
           </header>
 
+          {/* PROJECTS SECTION */}
           <section className="container">
             <div className="row text-center">
               <div className="col">
-                <h3 className="display-1 my-4">Projects</h3>
+                <h1 className="projects_heading">Projects</h1>
+
                 <Chips
                   activeTech={activeTech}
                   handleRequestDelete={this.handleRequestDelete}
                 />
-                <button onClick={this.toggleFilter}>{filter.title}</button>
-                {filter.status &&
+                <Projects projects={projects} activeTech={activeTech} />
+
+                <FloatingActionButton
+                  className="my-4"
+                  backgroundColor="#03A9F4"
+                  secondary={filterStatus}
+                  onTouchTap={this.toggleFilter}
+                  mini={true}
+                >
+                  {filterStatus ? <ContentRemove /> : <ContentAdd />}
+                </FloatingActionButton>
+
+                {filterStatus &&
                   <Checkboxes
                     activeTech={activeTech}
                     allTech={allTech}
                     handleCheck={this.handleCheck}
                   />}
 
-                <Projects projects={projects} activeTech={activeTech} />
               </div>
+            </div>
+          </section>
+
+          <section className="container">
+            <div className="my-5">
+              Other Section
             </div>
           </section>
 

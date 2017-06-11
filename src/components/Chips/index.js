@@ -8,6 +8,10 @@ const styles = {
   chip: {
     margin: 4,
   },
+  label: {
+    color: '#FFFFFF',
+  },
+  backgroundColor: '#03A9F4',
 }
 
 export default class Chips extends Component {
@@ -17,17 +21,20 @@ export default class Chips extends Component {
   render() {
     const { activeTech, handleRequestDelete } = this.props
     return (
-      <div className="d-flex justify-content-center">
+      <div className="d-flex justify-content-center mb-4">
+
         {activeTech.map(tech => (
           <Chip
             key={tech}
             onRequestDelete={() => handleRequestDelete(tech)}
             style={styles.chip}
             labelStyle={styles.label}
+            backgroundColor={styles.backgroundColor}
           >
             {tech}
           </Chip>
         ))}
+
       </div>
     )
   }

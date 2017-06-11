@@ -4,11 +4,6 @@ import _ from 'lodash'
 // Material UI
 import Paper from 'material-ui/Paper'
 
-// Styling
-const style = {
-  height: 60,
-}
-
 export default class Projects extends Component {
   render() {
     const { projects, activeTech } = this.props
