@@ -11,12 +11,17 @@ const styles = {
     bottom: 10,
     left: '50%',
   },
-  inputSection: {
+  centerSection: {
     position: 'relative',
     left: '-50%',
   },
   button: {
     color: '#FFFFFF',
+  },
+  swatch: {
+    position: 'absolute',
+    top: '-250px',
+    left: '50%',
   },
 }
 
@@ -26,7 +31,7 @@ export default class InputColors extends Component {
     const { colors, handleChange1, handleChange2, handleSelect } = this.props
     return (
       <section style={styles.section}>
-        <div style={styles.inputSection} className="row">
+        <div style={styles.centerSection} className="row">
 
           <div className="col">
             <FlatButton
@@ -35,10 +40,14 @@ export default class InputColors extends Component {
               onClick={() => handleSelect('color1')}
             />
             {colors.swatch1 &&
-              <SwatchesPicker
-                color={colors.color1}
-                onChangeComplete={handleChange1}
-              />}
+              <div style={styles.swatch}>
+                <div style={styles.centerSection}>
+                  <SwatchesPicker
+                    color={colors.color1}
+                    onChangeComplete={handleChange1}
+                  />
+                </div>
+              </div>}
           </div>
 
           <div className="col">
@@ -48,10 +57,14 @@ export default class InputColors extends Component {
               onClick={() => handleSelect('color2')}
             />
             {colors.swatch2 &&
-              <SwatchesPicker
-                color={colors.color1}
-                onChangeComplete={handleChange1}
-              />}
+              <div style={styles.swatch}>
+                <div style={styles.centerSection}>
+                  <SwatchesPicker
+                    color={colors.color2}
+                    onChangeComplete={handleChange2}
+                  />
+                </div>
+              </div>}
           </div>
 
         </div>

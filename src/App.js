@@ -92,15 +92,21 @@ export default class App extends Component {
     }
   }
 
-  handleColor1 = ({ hex }) => {
+  handleColorChange1 = ({ hex }) => {
     const { headerColors } = this.state
-    const updateColor = update(headerColors, { color1: { $set: hex } })
+    const updateColor = update(headerColors, {
+      color1: { $set: hex },
+      swatch1: { $set: false },
+    })
     this.setState({ headerColors: updateColor })
   }
 
-  handleColor2 = ({ hex }) => {
+  handleColorChange2 = ({ hex }) => {
     const { headerColors } = this.state
-    const updateColor = update(headerColors, { color2: { $set: hex } })
+    const updateColor = update(headerColors, {
+      color2: { $set: hex },
+      swatch2: { $set: false },
+    })
     this.setState({ headerColors: updateColor })
   }
 
@@ -141,8 +147,8 @@ export default class App extends Component {
                 </div>
                 <InputColors
                   colors={headerColors}
-                  handleChange1={this.handleColor1}
-                  handleChange2={this.handleColor2}
+                  handleChange1={this.handleColorChange1}
+                  handleChange2={this.handleColorChange2}
                   handleSelect={this.handleColorSelect}
                 />
               </div>
