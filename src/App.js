@@ -29,6 +29,9 @@ export default class App extends Component {
       swatch1: false,
       swatch2: false,
     },
+    activeTech: [],
+    allTech: [],
+    selectedTech: null,
   }
   componentWillMount() {
     const arrTechnologies = _.map(projects, 'technologies')
@@ -39,7 +42,7 @@ export default class App extends Component {
     this.setState({ activeTech: technologies, allTech: technologies })
   }
 
-  handleRequestDelete = tech => {
+  handleChipRequestDelete = tech => {
     const { activeTech } = this.state
     const index = activeTech.indexOf(tech)
     const updatedTech = update(activeTech, { $splice: [[index, 1]] })
@@ -59,6 +62,16 @@ export default class App extends Component {
     this.setState({ activeTech: technologies })
   }
 
+  handleChipSelect = tech => {
+    const { selectedTech } = this.state
+    const isNew = tech !== selectedTech
+    if (isNew) {
+      this.setState({ selectedTech: tech })
+    } else {
+      this.setState({ selectedTech: null })
+    }
+  }
+
   handleCheck = tech => {
     const { activeTech } = this.state
     const index = activeTech.indexOf(tech)
@@ -70,7 +83,6 @@ export default class App extends Component {
       const addTech = _.concat(activeTech, tech)
       this.setState({ activeTech: addTech })
     }
-    // this.state({ activeTech: updatedTech })
   }
 
   handleColorSelect = color => {
@@ -123,17 +135,27 @@ export default class App extends Component {
   }
 
   toggleFilter = () => {
-    const { filterStatus } = this.state
-    const isFilterActive = filterStatus
-    if (isFilterActive) {
-      this.setState({ filterStatus: false })
-    } else {
-      this.setState({ filterStatus: true })
-    }
+    const { allTech, filterStatus } = this.state
+
+    this.setState({ activeTech: allTech })
+
+    // Shows Checkboxes
+    // const isFilterActive = filterStatus
+    // if (isFilterActive) {
+    //   this.setState({ filterStatus: false })
+    // } else {
+    //   this.setState({ filterStatus: true })
+    // }
   }
 
   render() {
-    const { activeTech, allTech, filterStatus, headerColors } = this.state
+    const {
+      activeTech,
+      allTech,
+      filterStatus,
+      headerColors,
+      selectedTech,
+    } = this.state
 
     // Styling
     const styles = {
@@ -175,10 +197,16 @@ export default class App extends Component {
 
                 <Chips
                   activeTech={activeTech}
-                  handleRequestDelete={this.handleRequestDelete}
+                  selected={selectedTech}
+                  handleSelect={this.handleChipSelect}
+                  handleRequestDelete={this.handleChipRequestDelete}
                 />
 
-                <Projects projects={projects} activeTech={activeTech} />
+                <Projects
+                  projects={projects}
+                  activeTech={activeTech}
+                  selected={selectedTech}
+                />
 
                 <FloatingActionButton
                   className="projects_floating_button"

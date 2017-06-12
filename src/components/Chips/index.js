@@ -15,29 +15,36 @@ const styles = {
     fontSize: '1.2rem',
     fontWeight: 100,
   },
-  backgroundColor: '#03A9F4',
 }
 
 export default class Chips extends Component {
-  deleteTech() {
-    console.log('tech deleted')
-  }
   render() {
-    const { activeTech, handleRequestDelete } = this.props
+    const {
+      activeTech,
+      selected,
+      handleSelect,
+      handleRequestDelete,
+    } = this.props
     return (
       <div className="d-flex justify-content-center mb-4">
 
-        {activeTech.map(tech => (
-          <Chip
-            key={tech}
-            onRequestDelete={() => handleRequestDelete(tech)}
-            style={styles.chip}
-            labelStyle={styles.label}
-            backgroundColor={styles.backgroundColor}
-          >
-            {tech}
-          </Chip>
-        ))}
+        {activeTech.map(tech => {
+          const isSelected = tech === selected
+          console.log(selected)
+          const backgroundColor = isSelected ? '#FF4081' : '#03A9F4'
+          return (
+            <Chip
+              key={tech}
+              style={styles.chip}
+              labelStyle={styles.label}
+              backgroundColor={backgroundColor}
+              onTouchTap={() => handleSelect(tech)}
+              onRequestDelete={() => handleRequestDelete(tech)}
+            >
+              {tech}
+            </Chip>
+          )
+        })}
 
       </div>
     )

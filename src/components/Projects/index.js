@@ -9,35 +9,51 @@ import FlatButton from 'material-ui/FlatButton'
 const styles = {
   paper: {
     minHeight: 100,
+    padding: 0,
+  },
+  image: {
+    borderTopLeftRadius: '2px',
+    borderTopRightRadius: '2px',
   },
   buttons: {
-    borderRight: '1px solid #212121',
+    border: '1px solid #212121',
+    height: '100%',
+    marginRight: 3,
+    marginLeft: 3,
   },
 }
 
 export default class Projects extends Component {
   render() {
-    const { projects, activeTech } = this.props
+    const { projects, activeTech, selected } = this.props
     if (projects) {
       return (
         <div className="row justify-content-center">
 
           {projects.map((project, index) => {
-            const { title, technologies } = project
+            const { title, technologies, image } = project
             const validTech = _.difference(technologies, activeTech)
+            const isSelected = technologies.indexOf(selected) > -1
+            const paperDepth = isSelected ? 5 : 1
             if (validTech.length === 0) {
               return (
-                <div className="col-4 mb-4" key={index}>
-                  <Paper style={styles.paper}>
+                <div className="col-sm-12 col-md-4 mb-4" key={index}>
+                  <Paper style={styles.paper} zDepth={paperDepth}>
+                    <a href="#">
+                      <img
+                        src={image}
+                        className="img-fluid"
+                        style={styles.image}
+                      />
+                    </a>
+                    <div className="p-3">
+                      <h3 className="pt-2">{title}</h3>
 
-                    <h3 className="pt-4">{title}</h3>
-
-                    {/* Technologies Used */}
-                    <div>
+                      {/* Technologies Used */}
                       {technologies.map((tech, index) => {
                         const isLastTech = technologies.length - 1 === index
                         const isSecondLastTech =
-                          technologies.length - 1 === index
+                          technologies.length - 2 === index
                         return (
                           <span key={tech} className="text-muted">
                             {!isLastTech && !isSecondLastTech && tech + ', '}
@@ -46,18 +62,14 @@ export default class Projects extends Component {
                           </span>
                         )
                       })}
-                    </div>
 
-                    <div className="row py-3">
-                      <div className="col text-right" style={styles.buttons}>
-                        <FlatButton label="Demo" />
-                      </div>
-                      <div className="col text-left">
+                      <div className="mt-2">
                         <FlatButton
                           label="Github"
                           icon={<i className="fa fa-github" />}
                         />
                       </div>
+
                     </div>
 
                   </Paper>
