@@ -3,6 +3,20 @@
   text-align: center;
 }
 
+.header_heading {
+  font-size: 3.5rem;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.heading_cta_icon {
+  vertical-align: baseline !important;
+}
+
+.heading_image {
+  border-radius: 50%;
+}
+
 .projects_heading {
   margin-top: 4rem;
   margin-bottom: 1.5rem;

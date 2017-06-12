@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import update from 'immutability-helper'
 import _ from 'lodash'
 import './App.css'
+import profilePicture from './images/thomas_mirmo.jpg'
 
 // Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import FloatingActionButton from 'material-ui/FloatingActionButton'
 import ContentAdd from 'material-ui/svg-icons/content/add'
 import ContentRemove from 'material-ui/svg-icons/content/remove'
+import RaisedButton from 'material-ui/RaisedButton'
 import Divider from 'material-ui/Divider'
+import Paper from 'material-ui/Paper'
 
 // Components
 import Nav from './components/Nav'
@@ -24,8 +27,8 @@ export default class App extends Component {
   state = {
     filterStatus: false,
     headerColors: {
-      color1: '#af74b5',
-      color2: '#6dfee9',
+      color1: '#03A9F4',
+      color2: '#C5CAE9',
       swatch1: false,
       swatch2: false,
     },
@@ -165,6 +168,8 @@ export default class App extends Component {
       },
     }
 
+    const noActiveTech = activeTech.length === 0
+
     return (
       <MuiThemeProvider>
         <div>
@@ -173,11 +178,27 @@ export default class App extends Component {
           <header style={styles.header}>
             <div className="container">
               <div className="row header_content">
-                <div className="col align-self-center">
-                  Thomas Mirmo
+                <div className="col align-self-center text-left">
+                  <h1 className="header_heading text-white">Thomas Mirmo</h1>
+                  <p className="lead text-white">
+                    Aspiring Frontend Developer
+                  </p>
+                  <RaisedButton
+                    label="Let's Connect"
+                    labelColor="#FFFFFF"
+                    backgroundColor="#0077B5"
+                    icon={
+                      <i className="fa fa-linkedin text-white heading_cta_icon" />
+                    }
+                  />
                 </div>
                 <div className="col align-self-center">
-                  Image
+                  <Paper circle={true}>
+                    <img
+                      src={profilePicture}
+                      className="img-fluid heading_image"
+                    />
+                  </Paper>
                 </div>
                 <InputColors
                   colors={headerColors}
@@ -194,6 +215,9 @@ export default class App extends Component {
             <div className="row text-center">
               <div className="col">
                 <h1 className="projects_heading">Projects</h1>
+
+                {noActiveTech &&
+                  'Press the button below to bring back the projects.'}
 
                 <Chips
                   activeTech={activeTech}

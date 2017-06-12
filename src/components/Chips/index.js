@@ -30,7 +30,6 @@ export default class Chips extends Component {
 
         {activeTech.map(tech => {
           const isSelected = tech === selected
-          console.log(selected)
           const backgroundColor = isSelected ? '#FF4081' : '#03A9F4'
           return (
             <Chip
