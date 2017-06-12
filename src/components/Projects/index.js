@@ -23,19 +23,29 @@ export default class Projects extends Component {
         <div className="row justify-content-center">
 
           {projects.map((project, index) => {
-            const validTech = _.difference(project.technologies, activeTech)
+            const { title, technologies } = project
+            const validTech = _.difference(technologies, activeTech)
             if (validTech.length === 0) {
               return (
-                <div className="col-4" key={index}>
+                <div className="col-4 mb-4" key={index}>
                   <Paper style={styles.paper}>
 
-                    <h3 className="pt-4">{project.title}</h3>
+                    <h3 className="pt-4">{title}</h3>
 
                     {/* Technologies Used */}
                     <div>
-                      {project.technologies.map(tech => (
-                        <span key={tech} className="text-muted"> {tech} </span>
-                      ))}
+                      {technologies.map((tech, index) => {
+                        const isLastTech = technologies.length - 1 === index
+                        const isSecondLastTech =
+                          technologies.length - 1 === index
+                        return (
+                          <span key={tech} className="text-muted">
+                            {!isLastTech && !isSecondLastTech && tech + ', '}
+                            {isSecondLastTech && tech}
+                            {isLastTech && ' & ' + tech}
+                          </span>
+                        )
+                      })}
                     </div>
 
                     <div className="row py-3">

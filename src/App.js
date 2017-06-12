@@ -42,9 +42,21 @@ export default class App extends Component {
   handleRequestDelete = tech => {
     const { activeTech } = this.state
     const index = activeTech.indexOf(tech)
-    const removeTech = update(activeTech, { $splice: [[index, 1]] })
+    const updatedTech = update(activeTech, { $splice: [[index, 1]] })
 
-    this.setState({ activeTech: removeTech })
+    let allTechnologies = []
+
+    projects.map(project => {
+      const validTech = _.difference(project.technologies, updatedTech)
+      if (validTech.length === 0) {
+        allTechnologies = allTechnologies.concat(project.technologies)
+      }
+    })
+
+    const uniqTechnologies = _.uniq(allTechnologies)
+    const technologies = _.sortBy(uniqTechnologies)
+
+    this.setState({ activeTech: technologies })
   }
 
   handleCheck = tech => {
