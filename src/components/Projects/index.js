@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton'
 // Styling
 const styles = {
   paper: {
-    minHeight: 100,
+    height: '100%',
     padding: 0,
   },
   image: {
@@ -31,7 +31,7 @@ export default class Projects extends Component {
         <div className="row justify-content-center">
 
           {projects.map((project, index) => {
-            const { title, technologies, image } = project
+            const { title, technologies, image, url, github } = project
             const validTech = _.difference(technologies, activeTech)
             const isSelected = technologies.indexOf(selected) > -1
             const paperDepth = isSelected ? 5 : 1
@@ -39,7 +39,7 @@ export default class Projects extends Component {
               return (
                 <div className="col-sm-12 col-md-4 mb-4" key={index}>
                   <Paper style={styles.paper} zDepth={paperDepth}>
-                    <a href="#">
+                    <a href={url} target="_blank">
                       <img
                         src={image}
                         className="img-fluid"
@@ -57,17 +57,18 @@ export default class Projects extends Component {
                         return (
                           <span key={tech} className="text-muted">
                             {!isLastTech && !isSecondLastTech && tech + ', '}
-                            {isSecondLastTech && tech}
-                            {isLastTech && ' & ' + tech}
+                            {isSecondLastTech && tech + ' & '}
+                            {isLastTech && tech}
                           </span>
                         )
                       })}
 
                       <div className="mt-2">
-                        <FlatButton
-                          label="Github"
-                          icon={<i className="fa fa-github" />}
-                        />
+                        {github &&
+                          <FlatButton
+                            label="Github"
+                            icon={<i className="fa fa-github" />}
+                          />}
                       </div>
 
                     </div>

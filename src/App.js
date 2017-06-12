@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import update from 'immutability-helper'
 import _ from 'lodash'
 import './App.css'
-import profilePicture from './images/thomas_mirmo.jpg'
 
 // Material UI
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -12,6 +11,8 @@ import ContentRemove from 'material-ui/svg-icons/content/remove'
 import RaisedButton from 'material-ui/RaisedButton'
 import Divider from 'material-ui/Divider'
 import Paper from 'material-ui/Paper'
+import IconButton from 'material-ui/IconButton'
+import RestoreIcon from 'material-ui/svg-icons/action/restore'
 
 // Components
 import Nav from './components/Nav'
@@ -22,6 +23,13 @@ import InputColors from './components/InputColors'
 
 // Data
 import projects from './data/projects'
+
+// Images
+import profilePicture from './images/thomas_mirmo.jpg'
+import foodeeLogo from './images/foodee_logo.png'
+import wrLogo from './images/WR_Logo_Black.png'
+import iveyLogo from './images/Ivey-Main-Logo.jpg'
+import bcitLogo from './images/BCIT.jpg'
 
 export default class App extends Component {
   state = {
@@ -62,7 +70,7 @@ export default class App extends Component {
     const uniqTechnologies = _.uniq(allTechnologies)
     const technologies = _.sortBy(uniqTechnologies)
 
-    this.setState({ activeTech: technologies })
+    this.setState({ activeTech: technologies, selectedTech: null })
   }
 
   handleChipSelect = tech => {
@@ -170,6 +178,9 @@ export default class App extends Component {
 
     const noActiveTech = activeTech.length === 0
 
+    const allProjectsActive = _.difference(allTech, activeTech).length === 0
+    const restoreStatus = allProjectsActive ? true : false
+
     return (
       <MuiThemeProvider>
         <div>
@@ -178,12 +189,14 @@ export default class App extends Component {
           <header style={styles.header}>
             <div className="container">
               <div className="row header_content">
-                <div className="col align-self-center text-left">
+                <div className="col col-md-6 align-self-center text-left">
                   <h1 className="header_heading text-white">Thomas Mirmo</h1>
                   <p className="lead text-white">
                     Aspiring Frontend Developer
                   </p>
                   <RaisedButton
+                    href="https://www.linkedin.com/in/thomasmirmotahari/"
+                    target="_blank"
                     label="Let's Connect"
                     labelColor="#FFFFFF"
                     backgroundColor="#0077B5"
@@ -192,12 +205,9 @@ export default class App extends Component {
                     }
                   />
                 </div>
-                <div className="col align-self-center">
+                <div className="col col-md-5 align-self-center">
                   <Paper circle={true}>
-                    <img
-                      src={profilePicture}
-                      className="img-fluid heading_image"
-                    />
+                    <img src={profilePicture} className="heading_image" />
                   </Paper>
                 </div>
                 <InputColors
@@ -214,7 +224,7 @@ export default class App extends Component {
           <section className="container">
             <div className="row text-center">
               <div className="col">
-                <h1 className="projects_heading">Projects</h1>
+                <h1 className="section_heading">Projects</h1>
 
                 {noActiveTech &&
                   'Press the button below to bring back the projects.'}
@@ -238,8 +248,9 @@ export default class App extends Component {
                   secondary={filterStatus}
                   onTouchTap={this.toggleFilter}
                   mini={true}
+                  disabled={restoreStatus}
                 >
-                  {filterStatus ? <ContentRemove /> : <ContentAdd />}
+                  <RestoreIcon />
                 </FloatingActionButton>
 
                 {filterStatus &&
@@ -255,9 +266,49 @@ export default class App extends Component {
             </div>
           </section>
 
+          {/* Experience Section */}
           <section className="container">
-            <div className="my-5">
-              Other Section
+            <h1 className="section_heading text-center">Experience</h1>
+            <div className="row justify-content-center text-center mb-5">
+              <div className="col-5">
+                <img src={foodeeLogo} className="experience_logo" />
+                <h3>Digital Marketing Coordinator</h3>
+                <p className="text-muted">Aug 2016 - Present</p>
+              </div>
+              <div className="col-5">
+                <img src={wrLogo} className="experience_logo" />
+                <h3>Co-Founder</h3>
+                <p className="text-muted">Jan 2015 - Sep 2016</p>
+              </div>
+            </div>
+            <Divider />
+          </section>
+
+          {/* Education */}
+          <section className="container">
+            <h1 className="section_heading text-center">Education</h1>
+            <div className="row justify-content-center text-center mb-5">
+              <div className="col-5">
+                <img src={iveyLogo} className="experience_logo" />
+                <h3>Ivey Business School</h3>
+                <p className="text-muted">Class of 2016</p>
+              </div>
+              <div className="col-5">
+                <img src={bcitLogo} className="experience_logo" />
+                <h3>Computer Science</h3>
+                <p className="text-muted">
+                  JavaScript jQuery and Angular courses
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <section className="footer_content">
+            <div className="text-center p-4">
+              <IconButton iconClassName="fa fa-linkedin text-white" />
+              <IconButton iconClassName="fa fa-angellist text-white" />
+              <IconButton iconClassName="fa fa-github text-white" />
             </div>
           </section>
 

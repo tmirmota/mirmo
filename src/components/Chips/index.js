@@ -26,7 +26,7 @@ export default class Chips extends Component {
       handleRequestDelete,
     } = this.props
     return (
-      <div className="d-flex justify-content-center mb-4">
+      <div className="d-flex justify-content-center mb-5">
 
         {activeTech.map(tech => {
           const isSelected = tech === selected
