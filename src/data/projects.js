@@ -35,7 +35,7 @@ const projects = [
   },
   {
     title: 'Foodee Meal Plans',
-    technologies: ['Foundations 6', 'SASS'],
+    technologies: ['SASS', 'Foundations 6'],
     image: foodeeMealPlans,
     url: 'https://www.food.ee/office-meal-plan/',
     github: null,

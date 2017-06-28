@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Motion, spring } from 'react-motion'
 
 // Material UI
 import Chip from 'material-ui/Chip'
@@ -32,16 +33,20 @@ export default class Chips extends Component {
           const isSelected = tech === selected
           const backgroundColor = isSelected ? '#FF4081' : '#03A9F4'
           return (
-            <Chip
-              key={tech}
-              style={styles.chip}
-              labelStyle={styles.label}
-              backgroundColor={backgroundColor}
-              onTouchTap={() => handleSelect(tech)}
-              onRequestDelete={() => handleRequestDelete(tech)}
-            >
-              {tech}
-            </Chip>
+            <Motion defaultStyle={{ x: 0 }} style={{ x: spring(10) }}>
+              {interpolatingStyle => (
+                <Chip
+                  key={tech}
+                  style={styles.chip}
+                  labelStyle={styles.label}
+                  backgroundColor={backgroundColor}
+                  onTouchTap={() => handleSelect(tech)}
+                  onRequestDelete={() => handleRequestDelete(tech)}
+                >
+                  {tech}
+                </Chip>
+              )}
+            </Motion>
           )
         })}
 
