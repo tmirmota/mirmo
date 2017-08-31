@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { SwatchesPicker } from 'react-color'
 
 // Material UI
-import FlatButton from 'material-ui/FlatButton'
+import Button from 'material-ui/Button'
 
 // Styles
 const styles = {
@@ -34,11 +34,12 @@ export default class InputColors extends Component {
         <div style={styles.centerSection} className="row">
 
           <div className="col">
-            <FlatButton
-              label={colors.color1}
+            <Button
               labelStyle={styles.button}
               onClick={() => handleSelect('color1')}
-            />
+            >
+            {colors.color1}
+            </Button>
             {colors.swatch1 &&
               <div style={styles.swatch}>
                 <div style={styles.centerSection}>
@@ -51,11 +52,12 @@ export default class InputColors extends Component {
           </div>
 
           <div className="col">
-            <FlatButton
-              label={colors.color2}
+            <Button
               labelStyle={styles.button}
               onClick={() => handleSelect('color2')}
-            />
+            >
+            {colors.color2}
+            </Button>
             {colors.swatch2 &&
               <div style={styles.swatch}>
                 <div style={styles.centerSection}>

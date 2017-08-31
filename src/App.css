@@ -1,44 +1,33 @@
-.header_content {
-  min-height: 100vh;
-  text-align: center;
+.lc {
+  background: linear-gradient(to bottom right, #933bff, #d10dff);
+  height: 100vh;
+  width: 50%;
 }
 
-.header_heading {
-  font-size: 3.5rem;
-  font-weight: 300;
-  text-transform: uppercase;
+.lc-jumbotron {
+  align-items: center;
+  display: flex;
+  height: 100vh;
 }
 
-.heading_cta_icon {
-  vertical-align: baseline !important;
-}
-
-.heading_image {
-  border-radius: 50%;
-  max-width: 100%;
-  height: auto;
-}
-
-.section_heading {
-  margin-top: 4rem;
-  margin-bottom: 3rem;
-  font-size: 3.5rem;
+.lc-title {
+  color: #fafafa;
+  font-size: 28px;
   font-weight: 100;
-  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
 }
 
-.projects_floating_button {
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
+.rc-logo {
+  margin: auto;
 }
 
-.experience_logo {
-  max-width: 50%;
-  height: auto;
-  max-height: 60px;
-  margin-bottom: 1.2rem;
+.rc-title {
+  margin-top: 20px !important;
 }
 
-.footer_content {
-  background: linear-gradient(to bottom , rgba(189, 189, 189, 0.5), #BDBDBD);
+.rc-icon {
+  position: fixed !important;
+  bottom: 15px;
+  width: 50%;
 }
