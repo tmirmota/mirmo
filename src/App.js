@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import update from 'immutability-helper'
 import logo from './picatic-logo.svg'
+import picaticLogo from './picatic-p.svg'
 import _ from 'lodash'
 import './App.css'
 
@@ -21,6 +22,10 @@ export default class App extends Component {
       swatch1: false,
       swatch2: false
     }
+  }
+
+  componentWillMount() {
+    this.setState({ windowWidth: window.innerWidth })
   }
 
   handleColorSelect = color => {
@@ -86,14 +91,16 @@ export default class App extends Component {
     // }
   }
 
+  updateDimensions = () => {
+    this.setState({ windowWidth: window.innerWidth })
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.updateDimensions)
+  }
+
   render() {
-    const {
-      activeTech,
-      allTech,
-      filterStatus,
-      headerColors,
-      selectedTech
-    } = this.state
+    const { headerColors, selectedTech, windowWidth } = this.state
 
     // Styling
     const styles = {
@@ -103,44 +110,61 @@ export default class App extends Component {
       }
     }
 
+    const background = {
+      background: `url(${picaticLogo}) center right no-repeat / cover`
+    }
+
+    const phone = windowWidth < 480
+
+    const company = (
+      <div>
+        <a href="https://www.picatic.com/" target="_blank">
+          <img src={logo} className="rc-logo" />
+        </a>
+        <br />
+        <Typography type="subheading" className="rc-title">
+          API Growth Developer
+        </Typography>
+        <Typography type="caption">Jul '17 - Present</Typography>
+      </div>
+    )
+
     return (
       <MuiThemeProvider>
         <div className="container-fluid">
-          <div className="row align-items-center">
-            <div className="col lc">
-              <div className="lc-jumbotron">
-                <div className="lc-title">thomas mirmo</div>
+          <div className="row">
+            {!phone && (
+              <div className="col lc" style={background}>
+                <div className="lc-jumbotron">
+                  <div className="lc-title">thomas mirmo</div>
+                </div>
               </div>
-              {/* <div className="lc-colors">
-                <InputColors
-                colors={headerColors}
-                handleChange1={this.handleColorChange1}
-                handleChange2={this.handleColorChange2}
-                handleSelect={this.handleColorSelect}
-              />
-              </div> */}
-            </div>
+            )}
 
-            <div className="col text-center">
-              <img src={logo} className="rc-logo" />
-              <br />
-              <Typography type="subheading" className="rc-title">
-                API Growth Developer
-              </Typography>
-              <Typography type="caption">Jul '17 - Present</Typography>
-              <div className="rc-icon">
-                <IconButton>
-                  <i
-                    className="fa fa-github"
-                    href="https://github.com/tmirmota"
-                    target="_blank"
-                  />
+            <div className="col rc">
+              {phone && <div className="lc-title">thomas mirmo</div>}
+              <div>
+                <a href="https://www.picatic.com/" target="_blank">
+                  <img src={logo} className="rc-logo" />
+                </a>
+              </div>
+              <div>
+                <Typography type="subheading" className="rc-title">
+                  API Growth Developer
+                </Typography>
+              </div>
+              <div>
+                <Typography type="caption">Jul '17 - Present</Typography>
+              </div>
+              <div className="rc-footer">
+                <IconButton href="https://github.com/tmirmota" target="_blank">
+                  <i className="fa fa-github" />
                 </IconButton>
-                <IconButton>
-                  <i
-                    className="fa fa-linkedin"
-                    href="https://www.linkedin.com/in/thomasmirmotahari"
-                  />
+                <IconButton
+                  href="https://www.linkedin.com/in/thomasmirmotahari"
+                  target="_blank"
+                >
+                  <i className="fa fa-linkedin" />
                 </IconButton>
               </div>
             </div>

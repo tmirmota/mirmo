@@ -18,16 +18,29 @@
   width: 100%;
 }
 
-.rc-logo {
-  margin: auto;
+@media (max-width: 480px) {
+  .lc-title {
+    color: rgba(0, 0, 0, 0.54);
+    margin-bottom: 20px;
+  }
+}
+
+.rc {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
 }
 
 .rc-title {
   margin-top: 20px !important;
 }
 
-.rc-icon {
-  position: fixed !important;
-  bottom: 15px;
-  width: 50%;
+a:focus, 
+a:hover,
+a:active {
+  color: rgba(0, 0, 0, 0.54);
+  text-decoration: none;
 }
