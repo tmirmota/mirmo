@@ -35,8 +35,8 @@ export default class App extends Component {
   state = {
     filterStatus: false,
     headerColors: {
-      color1: '#03A9F4',
-      color2: '#C5CAE9',
+      color1: '#7F00FF',
+      color2: '#E100FF',
       swatch1: false,
       swatch2: false,
     },
@@ -192,7 +192,7 @@ export default class App extends Component {
                 <div className="col col-md-6 align-self-center text-left">
                   <h1 className="header_heading text-white">Thomas Mirmo</h1>
                   <p className="lead text-white">
-                    Aspiring Frontend Developer
+                    API Growth Developer at Picatic
                   </p>
                   <RaisedButton
                     href="https://www.linkedin.com/in/thomasmirmotahari/"
@@ -306,9 +306,9 @@ export default class App extends Component {
           {/* Footer */}
           <section className="footer_content">
             <div className="text-center p-4">
-              <IconButton iconClassName="fa fa-linkedin text-white" />
-              <IconButton iconClassName="fa fa-angellist text-white" />
-              <IconButton iconClassName="fa fa-github text-white" />
+              <IconButton iconClassName="fa fa-linkedin text-white" href="https://www.linkedin.com/in/thomasmirmotahari/" target="_blank" />
+              <IconButton iconClassName="fa fa-angellist text-white" href="https://angel.co/thomas-mirmotahari-22" target="_blank" />
+              <IconButton iconClassName="fa fa-github text-white" href="https://github.com/tmirmota" target="_blank" />
             </div>
           </section>
 
